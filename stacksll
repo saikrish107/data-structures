@@ -1,0 +1,77 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+        int data;
+        struct node *next;
+}*newnode,*temp,node;
+struct node *top=NULL;
+void push()
+{
+        int val;
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("Enter element:");
+        scanf("%d",&val);
+        newnode->data=val;
+        newnode->next=NULL;
+        if(top==NULL)
+        {
+                top=newnode;
+        }
+        else
+        {
+                newnode->next=top;
+                top=newnode;
+        }
+}
+void pop()
+{
+        int val;
+        if(top==NULL)
+        return -1;
+        else
+        {
+                val=top->data;
+                temp=top;
+                top=top->next;
+                return val;
+        }
+}
+void display()
+{
+        temp=top;
+        while(temp!=NULL)
+        {
+                printf("%d\n ",temp->data);
+                temp=temp->next;
+        }
+}
+void main()
+{
+        int val,ch;
+        while(1)
+        {
+                printf("1.push\n2.pop\n3.display\n4.exit\n");
+                printf("enter your choice\n");
+                scanf("%d",&ch);
+                switch(ch)
+                {
+                        case 1: push();
+                                break;
+                        case 2: pop();
+                                if(val==-1)
+                                printf("stack underflow\n");
+                                else
+                                printf("element deleted is %d\n",val);
+                                break;
+                        case 3: printf("the elements in the stack are\n");
+                                display();
+                                break;
+                        case 4: exit(0);
+                                break;
+                        default: printf("invalid choice");
+                }
+        }
+
+        return 0;
+}
