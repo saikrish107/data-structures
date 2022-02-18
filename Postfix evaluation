@@ -1,0 +1,79 @@
+#include<stdio.h>
+#include<ctype.h>
+#define MAX 5
+#define POSTFIXSIZE 5
+int stack[MAX];
+int top = -1;
+void push(int item)
+{
+    if(top >= MAX -1)
+    {
+        printf("Stack overflow");
+        return;
+    }
+    else{
+        top +=1;
+        stack[top] = item;
+    }
+}
+
+int pop()
+{
+    int item;
+    if(top < 0){
+        printf("Stack Underflow");
+    }
+    else{
+        item = stack[top];
+        top = top -1;
+        return item;
+    }
+}
+
+void Postfixeval(char postfix[])
+{
+    int i,A,B,result;
+    char ch;
+    for(i=0; postfix[i]!= '\0'; i++){
+        ch = postfix[i];
+        if(isdigit(ch)){
+            push(ch -'0');
+        }
+        else if(ch == '+'||ch =='-'||ch=='*'||ch=='/'||ch=='%'){
+            A = pop();
+            B = pop();
+            switch(ch){
+                case '*':result = B*A;
+                break;
+                case '/':result = B/A;
+                break;
+                case '+':result = B+A;
+                break;
+                case '-':result = B-A;
+                break;
+                case '%':result = B%A;
+                break;
+            }
+            push(result);
+            
+        }
+       
+    }
+    printf("%d",result);
+    printf("\nResult of evaluation:%d\n",pop());
+}
+    
+void main()
+    {
+        int i;
+        char p[POSTFIXSIZE];
+        printf("\n");
+        printf("\nEnter postfix expression");
+        for(i=0; i<= POSTFIXSIZE-1; i++){
+            scanf("%s", &p[i]);
+            
+        }
+                
+                Postfixeval(p);
+               
+     }
