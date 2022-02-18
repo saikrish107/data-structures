@@ -1,0 +1,54 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+#define MAX 6
+int Q[MAX];
+int front, rear;
+void insertQ(){
+    if(rear == MAX){
+        printf("Queue is full");
+    }
+    else{
+        int value;
+        printf("Enter the value of element:");
+        scanf("%d",&value);
+        Q[rear] = value;
+        rear++;
+    }
+}
+
+void deleteQ(){
+    if(rear == front){
+        printf("Queue is empty");
+    }
+    else{
+        printf("Element deleted from Queue is:%d\n",Q[front]);
+        front++;
+    }
+}
+
+void display(){
+    int i;
+    printf("Elements of queue are:");
+    for(i=front; i<rear; i++){
+        printf("%d",Q[i]);
+    }
+}
+
+void main(){
+    int i;
+    while(1){
+        printf("1.Display\n2.Insert\n3.Delete\n4.Exit\nEnter the choice:");
+        scanf("%d",&i);
+        switch(i){
+            case 1:display();
+            break;
+            case 2:insertQ();
+            break;
+            case 3:deleteQ();
+            break;
+            case 4:exit(1);
+            break;
+        }
+    }
+}
